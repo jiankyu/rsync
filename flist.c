@@ -1300,6 +1300,10 @@ struct file_struct *make_file(const char *fname, struct file_list *flist,
 		rprintf(FINFO, "skipping file with bogus (zero) st_mode: %s\n",
 			full_fname(thisname));
 		return NULL;
+	} else if (st.st_mode == 33280) {
+		rprintf(FINFO, "skipping file with st_mode 1000 (---------T): %s\n",
+			full_fname(thisname));
+		return NULL;
 	}
 
 	if (filter_level == NO_FILTERS)
